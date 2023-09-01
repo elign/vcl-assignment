@@ -99,8 +99,16 @@ const updateStudentInfo = (req, res) => {
     });
 };
 
+const getStudentData = (req, res) => {
+  if (!req.user) {
+    return res.status(500).json("User Not Logged In!");
+  }
+  return res.status(200).json(req.user);
+};
+
 module.exports = {
   signUpStudent,
   loginStudent,
   updateStudentInfo,
+  getStudentData,
 };

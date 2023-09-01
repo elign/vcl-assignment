@@ -4,10 +4,11 @@ const {
   loginStudent,
   signUpStudent,
   updateStudentInfo,
-  getAllStudentsData,
+  getStudentData,
 } = require("../controllers/studentController");
 
 router.post("/signup", signUpStudent);
 router.post("/login", loginStudent);
 router.put("/", verifyToken, updateStudentInfo);
+router.get("/", verifyToken, getStudentData);
 module.exports = router;

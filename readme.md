@@ -53,11 +53,11 @@ Certainly! Here are the API endpoints that correspond to the tasks you've listed
 
 5. **Fetching All Student Information:**
 
-   - Endpoint: `GET /api/students`
+   - Endpoint: `GET /api/staff/students`
    - Description: Retrieves a list of all student information stored in the database.
 
 6. **Fetching Information of a Specific Student:**
-   - Endpoint: `GET /api/students/:studentId`
+   - Endpoint: `GET /api/students`
    - Description: Retrieves detailed information of a specific student identified by the provided student ID in the URL.
 
 ### Database Requirements
