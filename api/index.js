@@ -12,6 +12,7 @@ const corsOptions = {
 };
 
 const studentRouter = require("./routes/studentRouter");
+const staffRouter = require("./routes/staffRouter");
 
 
 const app = express();
@@ -36,3 +37,6 @@ try {
 app.listen(port, () => console.log(`Backend listening on port ${port}`));
 
 app.use("/students", studentRouter);
+app.use("/staff", staffRouter);
+
+

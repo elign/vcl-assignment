@@ -1,12 +1,12 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const Student = require("../models/studentModel");
+const Staff = require("../models/staffModel");
 
-const signUpStudent = async (req, res) => {
+const signUpStaffMember = async (req, res) => {
   const { name, email, password } = req.body;
 
   try {
-    const userDoc = await Student.create({
+    const userDoc = await Staff.create({
       name,
       email,
       password: bcrypt.hashSync(password, 4),
@@ -14,13 +14,13 @@ const signUpStudent = async (req, res) => {
     res.status(200).json(userDoc);
   } catch (error) {
     console.log(error);
-    res.status(422).json("User could not be created.");
+    res.status(422).json("Staff Member could not be created.");
   }
 };
 
-const loginStudent = async (req, res) => {
+const loginStaffMember = async (req, res) => {
   const { email, password } = req.body;
-  const userDoc = await Student.findOne({ email });
+  const userDoc = await Staff.findOne({ email });
 
   if (userDoc) {
     const passwordIsValid = bcrypt.compareSync(password, userDoc.password);
@@ -52,11 +52,11 @@ const loginStudent = async (req, res) => {
       });
     }
   } else {
-    res.status(404).json("User not found");
+    res.status(404).json("Staff Member not found");
   }
 };
 
 module.exports = {
-  signUpStudent,
-  loginStudent,
+  signUpStaffMember,
+  loginStaffMember,
 };
