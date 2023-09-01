@@ -4,6 +4,7 @@ const {
   loginStudent,
   signUpStudent,
   updateStudentInfo,
+  getAllStudentsData,
 } = require("../controllers/studentController");
 
 router.post("/signup", signUpStudent);

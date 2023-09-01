@@ -29,7 +29,7 @@ const verifyToken = (req, res, next) => {
                 req.user = undefined;
                 next();
               });
-          } else {
+          } else if(requestRoute === "/staff") {
             Staff.findOne({
               _id: decode?.id,
             })

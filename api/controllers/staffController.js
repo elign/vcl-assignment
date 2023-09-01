@@ -1,6 +1,7 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const Staff = require("../models/staffModel");
+const Student = require("../models/studentModel");
 
 const signUpStaffMember = async (req, res) => {
   const { name, email, password } = req.body;
@@ -56,7 +57,20 @@ const loginStaffMember = async (req, res) => {
   }
 };
 
+const getAllStudentsData = async (req, res) => {
+  if (!req.user) {
+    return res.status(200).json("User Not Logged In!");
+  }
+  try {
+    const students = await Student.find();
+    res.status(200).json(students);
+  } catch (error) {
+    res.status(404).json(error);
+  }
+};
+
 module.exports = {
   signUpStaffMember,
   loginStaffMember,
+  getAllStudentsData,
 };
