@@ -36,7 +36,7 @@ try {
 
 app.listen(port, () => console.log(`Backend listening on port ${port}`));
 
-app.use("/students", studentRouter);
+app.use("/student", studentRouter);
 app.use("/staff", staffRouter);
 
 

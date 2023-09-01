@@ -27,16 +27,17 @@ const studentSchema = new Schema({
   },
 
   contactNumber: String,
-  currentResumeLink: String,
+  currentResumeLink: {
+    timestamp: Date,
+    fileLink: String,
+  },
   uploadHistory: [
     {
       timestamp: Date,
-      fileName: String,
-      fileSize: Number,
       fileLink: String,
     },
   ],
 });
 
-const Student = mongoose.model('student', studentSchema);
+const Student = mongoose.model("student", studentSchema);
 module.exports = Student;

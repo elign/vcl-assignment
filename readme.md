@@ -43,7 +43,7 @@ Certainly! Here are the API endpoints that correspond to the tasks you've listed
 
 3. **Submitting and Updating Student Information:**
 
-   - Endpoint: `PUT /api/students/:studentId`
+   - Endpoint: `PUT /api/students`
    - Description: Allows authorized users to update existing student information by providing the student's ID in the URL.
 
 4. **Uploading Resume in PDF Format:**
