@@ -31,12 +31,14 @@ Certainly! Here are the API endpoints that correspond to the tasks you've listed
 
 1. **Student and Staff, Sign Up:**
 
-   - Endpoint: `POST /api/signup`
+   - Endpoint: `POST /api/students/signup`
+     `POST /api/staff/signup`
    - Description: Allows students and staff to create new accounts by providing necessary registration information.
 
 2. **Student and Staff Login:**
 
-   - Endpoint: `POST /api/login`
+   - Endpoint: `POST /api/students/login`
+     `POST /api/staff/login`
    - Description: Handles user login by verifying credentials and providing an authentication token.
 
 3. **Submitting and Updating Student Information:**
