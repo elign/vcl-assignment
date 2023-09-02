@@ -1,11 +1,31 @@
 import { useContext, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { UserContext } from '../../context/UserContext'
+import { UserContext } from '../UserContext';
 
 const LoginPage = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const navigate = useNavigate();
+    const { user, setUser } = useContext(UserContext);
+
+    useEffect(() => {
+        if (user?.userType === 'Student') {
+            navigate('/student/dashboard');
+        } else if (user?.userType === 'Staff') {
+            navigate('/staff/dashboard');
+        }
+    }, [user, navigate]);
+
+    const loginUser = (event) => {
+        event.preventDefault();
+        axios.post("/user/login", { email, password }).then(data => {
+            console.log(data);
+            setUser(data);
+        }).catch(err => {
+            alert("login failed", err);
+        })
+    };
     return (
         <div className="grow flex items-center justify-around">
             <div className="mt-20">
@@ -27,7 +47,7 @@ const LoginPage = () => {
                 </form>
                 <div className="text-center my-4 text-sm text-gray-400">
                     <span>Don&#39;t have an Account yet? </span>
-                    <Link className="text-blue-800" to={"/register"}>
+                    <Link className="text-blue-800" to={"/signup"}>
                         Click to Register
                     </Link>
                 </div>
