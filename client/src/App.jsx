@@ -2,7 +2,7 @@ import './App.css'
 import { Route, Routes } from "react-router-dom"
 import axios from 'axios';
 import Layout from './Layout';
-// import { UserContextProvider } from "./context/UserContext";
+import { UserContextProvider } from "./UserContext";
 import LoginPage from './pages/LoginPage';
 import SignUpPage from './pages/SignUpPage';
 import StudentDashboard from './pages/StudentDashboard';
@@ -13,7 +13,7 @@ axios.defaults.baseURL = "http://127.0.0.1:4000";
 
 function App() {
   return (
-    // <UserContextProvider>
+    <UserContextProvider>
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<LoginPage />} />
@@ -22,7 +22,7 @@ function App() {
           <Route path="/staff/dashboard" element={<StaffDashboard />} />
         </Route>
       </Routes> 
-    // </UserContextProvider>
+    </UserContextProvider>
   )
 }
 

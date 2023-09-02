@@ -9,20 +9,24 @@ const LoginPage = () => {
     const navigate = useNavigate();
     const { user, setUser } = useContext(UserContext);
 
-    useEffect(() => {
+    const navigateToDashboard = () => {
         if (user?.userType === 'Student') {
             navigate('/student/dashboard');
         } else if (user?.userType === 'Staff') {
             navigate('/staff/dashboard');
         }
+    }
+    useEffect(() => {
+        navigateToDashboard();
     }, [user, navigate]);
 
     const loginUser = (event) => {
         event.preventDefault();
         axios.post("/user/login", { email, password }).then(data => {
-            console.log(data);
             setUser(data);
+            navigateToDashboard();
         }).catch(err => {
+            console.log(err);
             alert("login failed", err);
         })
     };
