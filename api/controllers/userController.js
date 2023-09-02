@@ -4,7 +4,6 @@ const User = require("../models/userModel");
 
 const signUpUser = async (req, res) => {
   const { name, email, password, userType } = req.body;
-
   try {
     const userDoc = await User.create({
       name,
@@ -57,7 +56,15 @@ const loginUser = async (req, res) => {
   }
 };
 
+const getUserProfile = (req, res) => {
+  if (!req.user) {
+    return res.status(500).json("User Not Logged In!");
+  }
+  return res.status(200).json(req.user);
+};
+
 module.exports = {
   signUpUser,
   loginUser,
+  getUserProfile,
 };

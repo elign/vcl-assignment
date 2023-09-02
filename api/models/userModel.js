@@ -9,7 +9,7 @@ const userSchema = new Schema({
 
   userType: {
     type: String,
-    enum: ["Student, Staff"],
+    enum: ["Student", "Staff"],
   },
 
   email: {
