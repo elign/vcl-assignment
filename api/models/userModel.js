@@ -1,10 +1,15 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
-const studentSchema = new Schema({
+const userSchema = new Schema({
   name: {
     type: String,
     required: [true, "Full name not entered"],
+  },
+
+  userType: {
+    type: String,
+    enum: ["Student, Staff"],
   },
 
   email: {
@@ -39,5 +44,5 @@ const studentSchema = new Schema({
   ],
 });
 
-const Student = mongoose.model("students", studentSchema);
-module.exports = Student;
+const User = mongoose.model("User", userSchema);
+module.exports = User;

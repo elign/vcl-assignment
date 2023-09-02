@@ -1,9 +1,7 @@
 const jwt = require("jsonwebtoken");
-const Student = require("../models/studentModel");
-const Staff = require("../models/staffModel");
+const User = require("../models/userModel");
 
 const verifyToken = (req, res, next) => {
-  const requestRoute = req.originalUrl;
   if (req.headers.cookie) {
     try {
       const cookies = req.headers.cookie.split("; ");
@@ -16,32 +14,17 @@ const verifyToken = (req, res, next) => {
             req.user = undefined;
             next();
           }
-
-          if (requestRoute == "/student") {
-            Student.findOne({
-              _id: decode?.id,
+          User.findOne({
+            _id: decode?.id,
+          })
+            .then((user) => {
+              req.user = user;
+              next();
             })
-              .then((user) => {
-                req.user = user;
-                next();
-              })
-              .catch((err) => {
-                req.user = undefined;
-                next();
-              });
-          } else if(requestRoute === "/staff") {
-            Staff.findOne({
-              _id: decode?.id,
-            })
-              .then((user) => {
-                req.user = user;
-                next();
-              })
-              .catch((err) => {
-                req.user = undefined;
-                next();
-              });
-          }
+            .catch((err) => {
+              req.user = undefined;
+              next();
+            });
         });
       } else {
         req.user = undefined;

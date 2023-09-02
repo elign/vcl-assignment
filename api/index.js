@@ -13,7 +13,7 @@ const corsOptions = {
 
 const studentRouter = require("./routes/studentRouter");
 const staffRouter = require("./routes/staffRouter");
-
+const userRouter = require("./routes/userRouter")
 
 const app = express();
 app.use(cookieParser());
@@ -38,5 +38,7 @@ app.listen(port, () => console.log(`Backend listening on port ${port}`));
 
 app.use("/student", studentRouter);
 app.use("/staff", staffRouter);
+app.use("/user", userRouter);
+
 
 
