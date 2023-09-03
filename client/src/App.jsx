@@ -9,7 +9,7 @@ import StudentDashboard from './pages/StudentDashboard';
 import StaffDashboard from './pages/StaffDashboard';
 
 axios.defaults.withCredentials = true;
-axios.defaults.baseURL = "http://127.0.0.1:4000";
+axios.defaults.baseURL = import.meta.env.VITE_BASE_URL;
 
 function App() {
   return (
