@@ -14,10 +14,10 @@ const storage = getStorage();
 
 const pdfFileUploader = async (req, res) => {
   try {
-    if (req.file.mimetype !== "application/pdf") {
+    if (req.file?.mimetype !== "application/pdf") {
       throw new Error("Invalid file type. Please upload PDF.");
     }
-    if (req.file.size > 2 * 1024 * 1024) {
+    if (req.file?.size > 2 * 1024 * 1024) {
       throw new Error("File size should be lesser that 2 MB");
     }
     const dateTime = getCurrentDateTime();
@@ -43,6 +43,7 @@ const pdfFileUploader = async (req, res) => {
       resumeLink: downloadURL,
     });
   } catch (error) {
+    console.log(error);
     return res.status(400).json(error.message);
   }
 };

@@ -2,19 +2,14 @@ import { useState } from 'react';
 import axios from "axios";
 
 function FileUploader({ link, setLink }) {
-    const [file, setFile] = useState(null);
     const [error, setError] = useState('');
 
-    const handleFileChange = (event) => {
-        const selectedFile = event.target.files[0];
-        setFile(selectedFile);
-    };
-
-    const handleUpload = (e) => {
-        e.preventDefault();
+    const handleUpload = (event) => {
+        event.preventDefault();
+        const file = event.target.files[0];
+        // create a new FormData object and append the file to it
         const formData = new FormData();
-        formData.append('file', file);
-
+        formData.append('filename', file);
         axios
             .post('/upload', formData, {
                 headers: {
@@ -23,8 +18,8 @@ function FileUploader({ link, setLink }) {
             })
             .then((response) => {
                 // Assuming the server responds with a link
-                setLink(response.resumeLink);
-                setError('');
+                console.log(response);
+                setLink(response.data.resumeLink);
             })
             .catch((error) => {
                 setError(error);
@@ -34,14 +29,11 @@ function FileUploader({ link, setLink }) {
 
     return (
         <div>
-            <h2>File Upload</h2>
-            <div className='flex gap-5 items-center'>
-                <input type="file" accept=".pdf" onChange={handleFileChange} />
-                <button className='primary' onClick={handleUpload}>Upload</button>
+            <h2>Upload Updated Resume</h2>
+            <div className='flex gap-10 items-center justify-between'>
+                <input name="filename" type="file" accept=".pdf" onChange={handleUpload} />
             </div>
-
-            {link && <p>Uploaded File Link: {link}</p>}
-            {error && <p style={{ color: 'red' }}>{error}</p>}
+            {error && <p style={{ color: 'red' }}>Error Occurred while uploading file!</p>}
         </div>
     );
 }
