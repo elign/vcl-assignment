@@ -17,8 +17,9 @@ export default function SignUpPage() {
         name,
         email,
         password,
+        userType: "Student",
       });
-      navigate("/login");
+      navigate("/");
     } catch (error) {
       console.log(error);
       alert("Some error related to database");

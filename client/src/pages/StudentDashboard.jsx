@@ -7,7 +7,6 @@ import FileUploader from "../components/FileUploader";
 const StudentDashboard = () => {
   const navigate = useNavigate();
   const { user, setUser } = useContext(UserContext);
-  console.log(user);
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [contactNumber, setContactNumber] = useState("");
