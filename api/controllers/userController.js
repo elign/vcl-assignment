@@ -63,7 +63,13 @@ const getUserProfile = (req, res) => {
   return res.status(200).json(req.user);
 };
 const logOutUser = (req, res) => {
-  res.clearCookie("token").json(true);
+  res
+    .clearCookie("token", {
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+    })
+    .json(true);
 };
 module.exports = {
   signUpUser,
