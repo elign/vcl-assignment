@@ -2,13 +2,13 @@ import { useContext, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { UserContext } from '../UserContext';
-
+import { Puff } from "react-loading-icons";
 const LoginPage = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
     const { user, setUser } = useContext(UserContext);
-
+    const [loading, setLoading] = useState(false);
     const navigateToDashboard = () => {
         if (user?.userType === 'Student') {
             navigate('/student/dashboard');
@@ -22,11 +22,14 @@ const LoginPage = () => {
 
     const loginUser = (event) => {
         event.preventDefault();
+        setLoading(true);
         axios.post("/user/login", { email, password }).then(data => {
+            setLoading(false);
             setUser(data);
             navigateToDashboard();
         }).catch(err => {
             console.log(err);
+            setLoading(false);
             alert("login failed", err);
         })
     };
@@ -47,7 +50,10 @@ const LoginPage = () => {
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                     />
-                    <button className="primary">Login</button>
+                    {loading && <Puff stroke="#98ff98" />}
+                    <button className="primary">
+                        Login
+                    </button>
                 </form>
                 <div className="text-center my-4 text-sm text-gray-400">
                     <span>Don&#39;t have an Account yet? </span>

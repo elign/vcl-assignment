@@ -62,9 +62,12 @@ const getUserProfile = (req, res) => {
   }
   return res.status(200).json(req.user);
 };
-
+const logOutUser = (req, res) => {
+  res.clearCookie("token").json(true);
+};
 module.exports = {
   signUpUser,
   loginUser,
   getUserProfile,
+  logOutUser,
 };

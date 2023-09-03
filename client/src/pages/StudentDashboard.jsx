@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import FileUploader from "../components/FileUploader";
 
 const StudentDashboard = () => {
+  const navigate = useNavigate();
   const { user, setUser } = useContext(UserContext);
   console.log(user);
   const [email, setEmail] = useState("");
@@ -20,6 +21,8 @@ const StudentDashboard = () => {
       setName(user.name || '');
       setContactNumber(user.contactNumber || '');
       setResumeLink(user.currentResumeLink?.fileLink || '');
+    } else {
+      navigate("/");
     }
   }, [user]);
 
@@ -44,7 +47,11 @@ const StudentDashboard = () => {
   }
 
   const logout = () => {
-
+    axios.post("/user/logout").then(() => {
+      navigate("/");
+    }).catch((error) => {
+      console.log(error);
+    })
   }
 
   return (
